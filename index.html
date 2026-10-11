@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masr Travel - Hotels, Tours & Nile Cruise from Luxor to Aswan $720</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#f5f6f8}
+.navbar{background:white;box-shadow:0 2px 15px rgba(0,0,0,0.1);position:sticky;top:0;z-index:500;padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-weight:800;font-size:22px}.logo span{color:#FFC107}
+.nav-links{display:flex;gap:10px;align-items:center}
+.nav-links a{font-weight:600;font-size:12px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#f5f5f5}
+.nav-links a.active{background:#111;color:white}
+.btn{padding:12px 22px;border-radius:30px;font-weight:700;border:none;cursor:pointer;display:inline-block;font-size:14px}
+.btn-whats{background:#25D366;color:white}.btn-blue{background:#0d6efd;color:white}.btn-gold{background:#FFC107;color:#000}.btn-dark{background:#111;color:white}
+.hero{background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.75)),url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=1200&q=80&auto=format&fit=crop');background-size:cover;background-position:center;color:white;text-align:center;padding:100px 20px 80px}
+.page{max-width:1400px;margin:auto;padding:30px 20px;display:none}.page.active{display:block}
+.section-title{font-size:32px;font-weight:800;text-align:center;margin:15px 0 25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:28px}
+.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.08);border:1px solid #eee}
+.card img{width:100%;height:320px;object-fit:cover;display:block;background:#ddd}
+.card-body{padding:20px}
+.price{color:#0a7e07;font-weight:700;font-size:14px;margin-top:8px;line-height:1.6}
+.tag{background:#111;color:#FFC107;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin-bottom:8px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:999;align-items:center;justify-content:center;padding:15px}.modal.active{display:flex}
+.box{background:white;border-radius:18px;padding:28px;max-width:520px;width:100%;text-align:center}
+.box input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin:7px 0;font-family:Poppins}
+.confirm-box{background:#f0fff4;border:2px solid #25D366;border-radius:14px;padding:18px;margin:12px 0;text-align:left;font-size:13px;line-height:1.9}
+.footer{background:#111;color:#888;padding:30px;text-align:center;font-size:13px;margin-top:50px}
+.lang-switch{display:flex;gap:3px;background:#f1f1f1;padding:3px;border-radius:20px}
+.lang-switch button{border:none;padding:5px 10px;border-radius:15px;font-size:11px;font-weight:700;cursor:pointer;background:transparent}
+.lang-switch button.active{background:#111;color:white}
+
+/* NEW - WhatsApp Float + Reviews */
+.whatsapp-float{position:fixed;bottom:22px;left:22px;background:#25D366;color:white;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 8px 25px rgba(37,211,102,0.5);z-index:900;text-decoration:none;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7)}70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.reviews{background:white;padding:40px 20px;margin:40px 0;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px}
+.review-card{border:1px solid #eee;border-radius:16px;padding:18px}
+.stars{color:#FFC107;font-size:16px}
+.trust-bar{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:25px 0;padding:18px;background:white;border-radius:14px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
+.trust-item{font-weight:700;font-size:13px;color:#111} .trust-item span{color:#0a7e07}
+
+@media(max-width:800px){.grid{grid-template-columns:1fr}.card img{height:260px}}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+<div class="logo">MASR <span>TRAVEL</span></div>
+<div class="nav-links">
+<a onclick="showPage('hotels')" id="l-hotels">🏨 Hotels</a>
+<a onclick="showPage('tours')" id="l-tours" class="active">🏜️ Tours</a>
+<a onclick="showPage('cruise')" id="l-cruise">🚢 Cruise</a>
+<a onclick="showPage('transfer')" id="l-transfer">✈️ Airport $25</a>
+<div class="lang-switch"><button id="btn-en" class="active">EN</button><button id="btn-fr">FR</button><button id="btn-es">ES</button></div>
+<span id="userInfo" style="display:none;color:#0d6efd;font-weight:800;font-size:12px"></span>
+<a onclick="openLogin()" style="background:#111;color:white;border-radius:20px;padding:8px 14px;font-size:12px">👤 Login</a>
+</div>
+</div>
+
+<div class="hero">
+<h1 style="font-size:44px;font-weight:800">Egypt Tours, Hotels & Nile Cruise</h1>
+<p style="font-size:18px;margin:15px auto;max-width:800px">Hotels from $55/night + 12 Private Tours + Nile Cruise Luxor to Aswan $720 + Airport $25</p>
+<button onclick="showPage('cruise')" class="btn btn-gold">See Nile Cruise $720</button>
+<button onclick="showPage('tours')" class="btn btn-blue">See All Tours</button>
+<div class="trust-bar" style="max-width:700px;margin:30px auto 0;color:#111"><div class="trust-item">⭐ 4.9/5 Google</div><div class="trust-item">✅ <span>Free Cancellation</span></div><div class="trust-item">💳 <span>Pay on Arrival</span></div><div class="trust-item">📱 <span>24/7 WhatsApp</span></div></div>
+</div>
+
+<div id="page-tours" class="page active">
+<h2 class="section-title">🏜️ Private Tours in Egypt - 12 Experiences</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">GIZA - BESTSELLER</span><h3>Giza Pyramids, Sphinx & Camel Ride</h3><div class="price">$60 Single | $35/p 2 Pax - Guide + Camel + Lunch</div><br><button onclick="bookWithEmail('Giza Pyramids Sphinx Camel Ride')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">CAIRO MUSEUM + PYRAMIDS</span><h3>Egyptian Museum & Giza Pyramids Full Day</h3><div class="price">$85 Single | $55/p 2 Pax</div><br><button onclick="bookWithEmail('Egyptian Museum Pyramids Full Day')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1539761425074-0f9821d73a6c?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">ALEXANDRIA</span><h3>Alexandria Day Tour - Library & Citadel</h3><div class="price">$170 Single | $125/p 2 Pax</div><br><button onclick="bookWithEmail('Alexandria Day Tour')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1461360228755-6e81c478b882?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">SAQQARA MEMPHIS</span><h3>Saqqara, Memphis & Dahshur - Step Pyramid</h3><div class="price">$90 Single | $60/p 2 Pax</div><br><button onclick="bookWithEmail('Saqqara Memphis Dahshur')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">OLD CAIRO</span><h3>Islamic & Coptic Cairo + Khan El Khalili</h3><div class="price">$70 Single | $40/p 2 Pax</div><br><button onclick="bookWithEmail('Islamic Coptic Cairo Bazaar')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">FAYOUM OASIS</span><h3>Fayoum Oasis & Wadi El Rayan Waterfalls</h3><div class="price">$110 Single | $70/p 2 Pax</div><br><button onclick="bookWithEmail('Fayoum Oasis Wadi El Rayan')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">LUXOR FULL DAY</span><h3>Luxor Full Day - Valley of Kings & Karnak</h3><div class="price">$180/p - Private Guide + Car + Lunch</div><br><button onclick="bookWithEmail('Luxor Full Day Valley Kings Karnak')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">CAIRO STOP OVER</span><h3>Cairo Stop Over 3 Days / 2 Nights</h3><div class="price">$290 Single | $195/p 2 Pax - Hotel + Tours + Airport $25</div><br><button onclick="bookWithEmail('Cairo Stop Over 3 Days Package')" class="btn btn-whats">Book Package + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">WHITE DESERT</span><h3>White Desert & Bahariya Oasis 2D/1N</h3><div class="price">$240/p - Jeep + Camping</div><br><button onclick="bookWithEmail('White Desert Bahariya')" class="btn btn-whats">Book Safari + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">RED SEA</span><h3>Hurghada Snorkeling - Red Sea Beach</h3><div class="price">$200/p - Boat + Snorkeling + Lunch</div><br><button onclick="bookWithEmail('Hurghada Snorkeling Red Sea')" class="btn btn-whats">Book + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1682686580391-615b1f28e5d7?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">SIWA OASIS</span><h3>Siwa Oasis 3 Days - Salt Lakes</h3><div class="price">$390/p - All Included</div><br><button onclick="bookWithEmail('Siwa Oasis 3 Days Salt Lakes')" class="btn btn-whats">Book Oasis + Email</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1571896346342-68aa2b7362c6?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">CUSTOM TOUR</span><h3>Custom Tour - Build Your Own</h3><div class="price">From $55/day</div><br><button onclick="bookWithEmail('Custom Tour')" class="btn btn-dark">Build Tour + Email</button></div></div>
+</div>
+
+<div class="reviews">
+<h2 style="text-align:center;font-weight:800;font-size:26px">⭐ What Our Guests Say - 4.9/5 on Google</h2>
+<div class="review-grid">
+<div class="review-card"><div class="stars">★★★★★</div><p style="font-size:13px;margin:8px 0">"Amazing Pyramids tour! Ahmed was the best guide, very knowledgeable. Pay on arrival made it stress free."</p><b style="font-size:12px">— Sarah M., USA - Giza Tour</b></div>
+<div class="review-card"><div class="stars">★★★★★</div><p style="font-size:13px;margin:8px 0">"Nile Cruise from Luxor to Aswan was perfect! Ship was 5 stars, food great. $720 worth every dollar."</p><b style="font-size:12px">— Julien D., France - Cruise $720</b></div>
+<div class="review-card"><div class="stars">★★★★★</div><p style="font-size:13px;margin:8px 0">"Airport pickup $25 was on time, private car with AC. Hotel booking easy. Highly recommend Masr Travel!"</p><b style="font-size:12px">— Carlos R., Spain - Hotels + Transfer</b></div>
+</div>
+</div>
+
+</div>
+
+<div id="page-cruise" class="page">
+<h2 class="section-title">🚢 Nile Cruise - Luxor to Aswan & Cairo</h2>
+<div class="grid" style="max-width:900px;margin:auto">
+<div class="card"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">LUXOR TO ASWAN - REAL NILE SHIP</span><h3>Cruise from Luxor to Aswan - 3N/4D - $720</h3><div class="price">$720/p Double | $1,050 Single</div><br><button onclick="bookWithEmail('Cruise Luxor to Aswan 3N/4D $720')" class="btn btn-whats" style="width:100%">Book Cruise Luxor to Aswan $720</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&q=80&auto=format&fit=crop"><div class="card-body"><span class="tag">DINNER CRUISE CAIRO - $60</span><h3>Dinner Nile Cruise Cairo $60 - 2 Hours</h3><div class="price">$60/p - Buffet + Show - Pay on Board</div><br><button onclick="bookWithEmail('Dinner Nile Cruise Cairo $60')" class="btn btn-whats" style="width:100%">Book Dinner Cruise $60</button></div></div>
+</div>
+</div>
+
+<div id="page-hotels" class="page"><h2 class="section-title">🏨 Hotels in Cairo - From $55/night</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80&auto=format&fit=crop"><div class="card-body"><h3>Downtown Cairo Hotels</h3><div class="price">From $55/night 3★ | $85 4★ | $130 5★</div><br><button onclick="bookWithEmail('Hotel Downtown Cairo')" class="btn btn-blue">Book Hotel + Email</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80&auto=format&fit=crop"><div class="card-body"><h3>Zamalek Luxury - Nile View</h3><div class="price">From $95/night</div><br><button onclick="bookWithEmail('Hotel Zamalek Nile View')" class="btn btn-blue">Book Hotel + Email</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=900&q=80&auto=format&fit=crop"><div class="card-body"><h3>Pyramids View Hotels - Giza</h3><div class="price">From $65/night</div><br><button onclick="bookWithEmail('Hotel Pyramids View Giza')" class="btn btn-blue">Book Hotel + Email</button></div></div></div></div>
+
+<div id="page-transfer" class="page"><h2 class="section-title">✈️ Airport Transfer $25 / $20</h2><div class="grid" style="max-width:800px;margin:auto"><div class="card" style="border:3px solid #FFC107"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80&auto=format&fit=crop"><div class="card-body"><h3>Cairo Airport CAI Private Transfer</h3><div class="price" style="font-size:18px">Pickup: $25 | Dropoff: $20 | Round: $40</div><br><button onclick="bookWithEmail('Airport Pickup $25 CAI')" class="btn btn-whats" style="width:100%">Book Pickup $25 + Email</button><br><br><button onclick="bookWithEmail('Airport Dropoff $20')" class="btn btn-dark" style="width:100%">Book Dropoff $20 + Email</button></div></div></div></div>
+
+<a href="https://wa.me/201035798828" target="_blank" class="whatsapp-float">💬</a>
+
+<div id="loginModal" class="modal"><div class="box"><h3>Masr Travel Account - Free</h3><div style="display:flex;gap:8px;margin:12px 0"><button id="tabLogin" onclick="switchTab('login')" style="flex:1;padding:10px;border-radius:10px;background:#111;color:white;font-weight:700">Login</button><button id="tabSignup" onclick="switchTab('signup')" style="flex:1;padding:10px;border-radius:10px;background:#f5f5f5;font-weight:700">Sign Up</button></div><div id="loginForm"><input id="lEmail" placeholder="Email"><input id="lPass" type="password" placeholder="Password"><button onclick="doLogin()" class="btn btn-dark" style="width:100%;margin-top:10px">Login</button></div><div id="signupForm" style="display:none"><input id="sName" placeholder="Full Name"><input id="sEmail" placeholder="Email"><input id="sPhone" placeholder="WhatsApp"><input id="sPass" type="password" placeholder="Password"><button onclick="doSignup()" class="btn btn-gold" style="width:100%;margin-top:10px">Create Free Account</button></div><button onclick="closeLogin()" style="margin-top:10px;background:none;border:none;color:#888">Close</button></div></div>
+
+<div id="confirmModal" class="modal"><div class="box" style="max-width:560px"><h3 style="color:#0a7e07;font-size:22px">✅ Booking Confirmed!</h3><div id="confirmDetails" class="confirm-box"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px"><button onclick="sendEmail()" class="btn btn-blue" style="width:100%;padding:14px">📧 Send Email to Me</button><button onclick="sendWhatsApp()" class="btn btn-whats" style="width:100%;padding:14px">💬 WhatsApp Us</button></div><button onclick="closeConfirm()" style="margin-top:14px;background:none;border:none;color:#888">Close</button></div></div>
+
+<div class="footer"><p>© 2026 Masr Travel - Cruise Luxor to Aswan $720 | Dinner Cruise $60 | Hotels From $55 | Airport $25 | travellmasr@gmail.com | 01035798828</p></div>
+
+<script>
+let currentUser=JSON.parse(localStorage.getItem('masrUser')||'null');
+let lastBooking={};
+function updateUI(){if(currentUser){document.getElementById('userInfo').style.display='inline';document.getElementById('userInfo').innerText='Hi, '+currentUser.name+' ✓';}}updateUI();
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.style.display='none');document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).style.display='block';let l=document.getElementById('l-'+p);if(l)l.classList.add('active');window.scrollTo(0,300)}
+function openLogin(){document.getElementById('loginModal').classList.add('active')}function closeLogin(){document.getElementById('loginModal').classList.remove('active')}
+function switchTab(t){if(t=='login'){document.getElementById('loginForm').style.display='block';document.getElementById('signupForm').style.display='none';document.getElementById('tabLogin').style.background='#111';document.getElementById('tabLogin').style.color='white';document.getElementById('tabSignup').style.background='#f5f5f5';document.getElementById('tabSignup').style.color='black'}else{document.getElementById('loginForm').style.display='none';document.getElementById('signupForm').style.display='block';document.getElementById('tabSignup').style.background='#111';document.getElementById('tabSignup').style.color='white';document.getElementById('tabLogin').style.background='#f5f5f5';document.getElementById('tabLogin').style.color='black'}}
+function doSignup(){let n=document.getElementById('sName').value,e=document.getElementById('sEmail').value,p=document.getElementById('sPhone').value,ps=document.getElementById('sPass').value;if(!n||!e||!ps){alert('Fill all fields');return;}let u={name:n,email:e,phone:p,pass:ps};localStorage.setItem('masrUser',JSON.stringify(u));localStorage.setItem('masrUsers_'+e,JSON.stringify(u));currentUser=u;updateUI();closeLogin();}
+function doLogin(){let e=document.getElementById('lEmail').value,ps=document.getElementById('lPass').value;let s=JSON.parse(localStorage.getItem('masrUsers_'+e)||'null');if(!s){alert('No account found');return;}if(s.pass!==ps){alert('Wrong password');return;}currentUser=s;localStorage.setItem('masrUser',JSON.stringify(s));updateUI();closeLogin();}
+function bookWithEmail(tour){
+if(!currentUser){openLogin();return;}
+let d=prompt('Enter your tour date (e.g. 20 Nov 2026):',new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}));
+if(!d) d=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+lastBooking={tour,date:d};
+let det=`<b>Dear ${currentUser.name},</b><br><br>✅ Your booking is <b>CONFIRMED</b><br><br>📌 <b>Service:</b> ${tour}<br>📅 <b>Date:</b> ${d}<br>👤 <b>Name:</b> ${currentUser.name}<br>📧 <b>Email:</b> ${currentUser.email}<br>📱 <b>Phone:</b> ${currentUser.phone||''}<br><br>💳 <b>Payment:</b> Pay Upon Arrival<br>✈️ Transfer: $25 Pickup / $20 Dropoff<br><br>We will contact you within 1 hour.<br><br><b>Masr Travel</b>`;
+document.getElementById('confirmDetails').innerHTML=det;
+document.getElementById('confirmModal').classList.add('active');
+}
+function closeConfirm(){document.getElementById('confirmModal').classList.remove('active')}
+function sendWhatsApp(){
+const msg = `Hi Masr Travel - NEW BOOKING CONFIRMED
+
+Name: ${currentUser.name}
+Email: ${currentUser.email}
+Phone: ${currentUser.phone || 'Not provided'}
+
+Booking: ${lastBooking.tour}
+Date: ${lastBooking.date}
+
+Please confirm.
+Email sent to client: ${currentUser.email}`;
+window.open("https://wa.me/201035798828?text=" + encodeURIComponent(msg), "_blank");
+closeConfirm();
+}
+function sendEmail(){
+const subject = `✅ Booking Confirmed - ${lastBooking.tour} - ${lastBooking.date} - Masr Travel`;
+const body = `Dear ${currentUser.name},
+
+Your booking is CONFIRMED!
+
+Service: ${lastBooking.tour}
+Date: ${lastBooking.date}
+Name: ${currentUser.name}
+Email: ${currentUser.email}
+Phone: ${currentUser.phone || ''}
+
+Payment: Pay Upon Arrival - No deposit needed
+Airport Transfer: Pickup $25 / Dropoff $20 available
+
+We will contact you within 1 hour on WhatsApp.
+
+Best regards,
+Masr Travel Team
+WhatsApp: 01035798828
+Email: travellmasr@gmail.com`;
+window.location.href = `mailto:${currentUser.email}?cc=travellmasr@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+showPage('tours');
+</script>
+</body>
+</html>
